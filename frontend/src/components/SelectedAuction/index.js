@@ -31,23 +31,10 @@ export default function SelectedAuction(props){
     useEffect(() => {
         if(!isEmpty(props.auctionObj) ){
             setOBJ(props.auctionObj)
-            startTimer()
         }
     }, [props.auctionObj]);
 
-    function startTimer() {
-        
-
-        try {
-            const timer = setInterval(async function() { 
-                const response = await api.get(`auction/room/${OBJ.id}`)
-                setOBJ(response.data)
-            }, 2000);
-            
-        } catch (error) {
-            if(error.response.data) {setMessage(error.response.data)} else { alert(error) }
-        }
-    }
+    
 
 
     async function makeABid(){
