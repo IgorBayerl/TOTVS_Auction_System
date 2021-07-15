@@ -8,7 +8,9 @@ export const ContentContainer = styled.div`
 `
 
 export const ListItem = styled.div`
+    /* background-color: red; */
     width: 100%;
+    /* margin-top: 10px; */
     padding: 1em;
     border-bottom: 1px solid #dedede;
     transition: all 0.2s;

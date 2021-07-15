@@ -7,6 +7,9 @@ import {ContentContainer, ListItem} from './style'
 export default function ListAuctions(props){
 
     const [auctionsList, setAuctionsList] = useState([]);
+    // const [token, setToken] = useState('');
+
+    
 
     async function getInfo(){
         try {

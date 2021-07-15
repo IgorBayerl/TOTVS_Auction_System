@@ -10,6 +10,10 @@ export default function BaseLayout({children}){
     
     const [selectedAuctionObj, setSelectedAuctionObj] = useState({})
 
+    function logTeste(pteste){
+        console.log(pteste)
+    }
+    
     return(
         <Body>
             <LayoutHeader/>
