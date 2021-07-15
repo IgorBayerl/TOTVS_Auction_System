@@ -48,7 +48,7 @@ export default function ListMyAuctions(props){
             }
 
             const response = await api.post('auction/create_auction', data)
-            if(response.data == 'Success') getInfo()
+            if(response.data === 'Success') getInfo()
         } catch (error) {
             if(error.response.data) {setWarningMessage(error.response.data)}else{console.log(error)}
         }
@@ -62,7 +62,7 @@ export default function ListMyAuctions(props){
             }
 
             const response = await api.post('auction/delete_auction', data)
-            if(response.data == 'Success') getInfo()
+            if(response.data === 'Success') getInfo()
             // setAuctionsList(response.data)
         } catch (error) {
             if(error.response.data) {setWarningMessage(error.response.data)}else{console.log(error)}
