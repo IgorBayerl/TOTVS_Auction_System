@@ -5,7 +5,7 @@ dotenv.config();
 
 
 const api = axios.create({
-    baseURL: process.env.API,
+    baseURL: 'https://totvs-desafio-fullstack-api.herokuapp.com/api',
 })
 
 api.interceptors.request.use(async config => {
