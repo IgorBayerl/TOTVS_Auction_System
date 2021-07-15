@@ -5,7 +5,7 @@ dotenv.config();
 
 
 const api = axios.create({
-    baseURL: process.env.API_URL,
+    baseURL: process.env.API,
 })
 
 api.interceptors.request.use(async config => {
