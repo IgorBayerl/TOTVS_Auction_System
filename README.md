@@ -22,6 +22,8 @@ npm install
 DATABASE_URL = Alguma URL de banco de dados SQL
 
 JWT_PASSWORD = Senha para gerar o token JWT
+
+PORT = Porta 
 ```
 
 *3* - Executar as migrations
