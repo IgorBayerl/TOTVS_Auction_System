@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 
 import api from '../../services/api'
 
-import {ContentContainer, ErrorMessage, InputContainer} from './style'
+import {ContentContainer, ErrorMessage, InputContainer,ContainerResp, ButtonUpdate} from './style'
 
 
 export default function SelectedAuction(props){
@@ -23,6 +23,7 @@ export default function SelectedAuction(props){
     })
     const [message, setMessage] = useState('')
     const [bidValue, setBidValue] = useState('')
+    const [situacaoString, setSituacaoString] = useState('')
 
     function isEmpty(obj) {
         return Object.keys(obj).length === 0;
@@ -31,10 +32,15 @@ export default function SelectedAuction(props){
     useEffect(() => {
         if(!isEmpty(props.auctionObj) ){
             setOBJ(props.auctionObj)
+            setSituacaoString(compareDates(OBJ.initial_date,OBJ.final_date))
         }
     }, [props.auctionObj]);
 
-    
+    useEffect(() => {
+        if(!isEmpty(OBJ) ){
+            setSituacaoString(compareDates(OBJ.initial_date,OBJ.final_date))
+        }
+    }, [OBJ]);
 
 
     async function makeABid(){
@@ -50,10 +56,48 @@ export default function SelectedAuction(props){
         }
     }
     
+    // todo 
+    // limitar caracteres do campo lances
+    // fazer atualizar automaticamente com web sockets
+    // comparar datas
+
+    async function updateThisAuctionInfo(){
+        try {
+            if(!isEmpty(OBJ)) {
+                const response = await api.get(`auction/room/${OBJ.id}`)
+                setOBJ(response.data)
+                compareDates(OBJ.initial_date,OBJ.final_date)
+            }
+        } catch (error) {
+            alert(error) 
+        }
+                 
+    }
+
+    function compareDates(pInitial, pFinal) {
+        
+        const dateNow = new Date().getTime();
+
+        const initialDate = new Date(pInitial).getTime();
+        const finalDate = new Date(pFinal).getTime();
+        if (dateNow > finalDate) {
+            return 'Leilão Acabou!';
+        }
+        if (dateNow < initialDate) {
+            return 'Leilão ainda não iniciou!';
+        }
+        if ( initialDate < dateNow <= finalDate) {
+            return('Leilão em andamento!');
+        }
+        return 'erro ao verificar o andamento do leilão'
+        
+    }
+
     if(OBJ.id){
         return(
         
             <ContentContainer>
+                <ButtonUpdate onClick={() => updateThisAuctionInfo()}>Atualizar</ButtonUpdate>
                 <h1>{OBJ.title.toUpperCase()}</h1>
                 {OBJ.is_new? <h3>Novo</h3> : <h3>Usado</h3> }
                 <br/>
@@ -68,6 +112,7 @@ export default function SelectedAuction(props){
                 {/* <p>{JSON.stringify(OBJ)}</p> */}
                 <h3>Valor Inicial : {OBJ.initial_value}</h3>
                 <br/>
+                <h3>{situacaoString}</h3>
                 <h3>Data inicial : {OBJ.initial_date}</h3>
                 <h3>Data final : {OBJ.final_date}</h3>
                 <br/>
@@ -78,7 +123,7 @@ export default function SelectedAuction(props){
                 <h3>Lance atual: R${OBJ.winner_value?OBJ.winner_value: OBJ.initial_value},00 - feito por {OBJ.winner_user_name?OBJ.winner_user_name: OBJ.owner_user_name}</h3>
                 
                 <br/>
-                <div>
+                <ContainerResp>
                     <InputContainer>
                         <label>R$ </label>
                         <input type='text'    value={bidValue}  onChange={e => setBidValue(e.target.value)}/>
@@ -86,7 +131,7 @@ export default function SelectedAuction(props){
                     </InputContainer>
                     <button onClick={() => makeABid()}>Fazer lance</button>
     
-                </div>
+                </ContainerResp>
                 <ErrorMessage>{message}</ErrorMessage>
     
             </ContentContainer>

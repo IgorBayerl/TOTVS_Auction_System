@@ -4,7 +4,7 @@ import LayoutHeader from '../LayoutHeader'
 import ListAuctions from '../ListAuctions'
 import ListMyAuctions from '../ListMyAuctions'
 import SelectedAuction from '../SelectedAuction'
-import {Body, MainContainer, SideCards, CenterCard} from './style'
+import {Body, MainContainer, SideCards, CenterCard, SideCardLeft} from './style'
 
 import api from '../../services/api'
 
@@ -30,13 +30,17 @@ export default function BaseLayout({children}){
 //         }
 //     }
 
+
+    // Todo
+    // Fazer responsividade
+    // esconder campos nas laterais e revelalos ao deslizar para os lados estilo Discord
     return(
         <Body>
             <LayoutHeader/>
             <MainContainer>
-                <SideCards>
+                <SideCardLeft>
                     <ListAuctions selectAction={setSelectedAuctionObj}/>
-                </SideCards>
+                </SideCardLeft>
                 <CenterCard>
                     <SelectedAuction auctionObj={selectedAuctionObj}/>
                 </CenterCard>

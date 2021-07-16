@@ -13,6 +13,7 @@ export const MainContainer = styled.div`
     height: 100%;
     max-height: calc(100vh - 80px);
     justify-content: space-between;
+    
 `
 
 export const CenterCard = styled.div`
@@ -28,6 +29,27 @@ export const CenterCard = styled.div`
   width: 100%;
   max-width: 50vw;
   height: calc(100% - 3rem);
+  @media (max-width: 1000px) {
+    max-width: 100%;
+  }
+`
+
+export const SideCardLeft = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 7px;
+  /* padding: 2rem 3rem; */
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 0px 4px 7px -3px rgba(0,0,0,0.16); 
+  box-shadow: 0px 4px 7px -3px rgba(0,0,0,0.16);
+  color: #C6C8CB;
+  height: calc(100% - 3rem);
+  min-width: 350px;
+  @media (max-width: 1000px) {
+    position: absolute;
+    display: none;
+  }
 `
 
 export const SideCards = styled.div`
@@ -42,5 +64,9 @@ export const SideCards = styled.div`
   color: #C6C8CB;
   height: calc(100% - 3rem);
   min-width: 350px;
+  @media (max-width: 1000px) {
+    position: absolute;
+    display: none;
+  }
 `
 
