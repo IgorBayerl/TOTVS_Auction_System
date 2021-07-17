@@ -128,7 +128,7 @@ export default function ListMyAuctions(props){
                 {auctionsList.map((localState, index) => (
                     <ListItem key={index} onClick={() =>    onSelectAuction(localState)}>
                         <h3 >{localState.title}</h3>
-                        <h5 >{localState.initial_value}</h5>
+                        <h5 >{localState.winner_value}</h5>
                         <h5 >{localState.description}</h5>
                         <DeleteButton onClick={() => deleteAuctionRequest(localState.id)} >Delete</DeleteButton>
                     </ListItem> 
